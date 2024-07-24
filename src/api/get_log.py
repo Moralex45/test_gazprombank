@@ -1,4 +1,3 @@
-import re
 from fastapi import APIRouter, UploadFile, BackgroundTasks, File
 
 from utils.regex_sorter import regex_log_worker
