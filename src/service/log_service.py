@@ -9,6 +9,7 @@ from connections.postgres import get_session
 from models.log import Log
 from models.message import Message
 
+
 class LogService():
 
     def __init__(
@@ -46,9 +47,8 @@ class LogService():
                 self.log_model.int_id
             ).where(self.log_model.address == address)
         ).order_by('int_id', 'created')
-        
-        query_alias = query.alias()
 
+        query_alias = query.alias()
 
         count_query = select(func.count()).select_from(query_alias)
         count_result = await self.session.execute(count_query)
@@ -57,10 +57,10 @@ class LogService():
         if query_size > 100:
             query = query.limit(100)
 
-
         # Execute the main query
         result = await self.session.execute(query)
         return result.all(), query_size
+
 
 @lru_cache()
 def get_log_service(

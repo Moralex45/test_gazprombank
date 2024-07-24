@@ -7,10 +7,12 @@ from connections.postgres import get_session
 
 router = APIRouter()
 
+
 def read_words(file: UploadFile):
     file_content = file.file.read()
     file_content = file_content.decode('utf-8')
     return file_content.splitlines()
+
 
 async def file_worker(file_content: str):
     async for session in get_session():
@@ -23,15 +25,15 @@ async def file_worker(file_content: str):
                 await log_service.create_log(parsing_result.get('data'))
             else:
                 print('something went wrong')
-        
+
 
 @router.post("/file")
 async def send_your_logfile_here(
-    background_tasks: BackgroundTasks, 
+    background_tasks: BackgroundTasks,
     file: UploadFile = File(...)
 ):
     file_content = read_words(file)
-    
+
     background_tasks.add_task(file_worker, file_content)
-    
+
     return {"message": "File uploaded successfully. Processing......"}

@@ -16,10 +16,14 @@ dependencies = [
     "pydantic-settings>=2.3.4",
     "psycopg2>=2.9.9",
     "psycopg2-binary>=2.9.9",
+    "autopep8>=2.3.1",
 ]
 requires-python = "==3.11.*"
 readme = "README.md"
 license = {text = "MIT"}
+
+[tool.pdm.scripts]
+autopep = "autopep8 -r --in-place --aggressive --aggressive src"
 
 
 [tool.pdm]

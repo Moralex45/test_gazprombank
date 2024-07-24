@@ -6,6 +6,7 @@ from fastapi.responses import ORJSONResponse
 from api.get_log import router as log_router
 from api.home import router as home_router
 
+
 def get_app_config() -> dict[str, Any]:
     """
     Load application configuration
@@ -19,6 +20,7 @@ def get_app_config() -> dict[str, Any]:
     }
 
     return config
+
 
 def create_app() -> FastAPI:
     """

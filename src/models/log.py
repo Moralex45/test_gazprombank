@@ -2,6 +2,7 @@ from sqlalchemy import Boolean, Column, DateTime, String, Index
 
 from models.base import BaseModel
 
+
 class Log(BaseModel):
     __tablename__ = 'log'
 

@@ -1,3 +1,6 @@
+from connections.postgres import Base
+from models.message import Message
+from models.log import Log
 import asyncio
 
 from logging.config import fileConfig
@@ -19,9 +22,6 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
-from models.log import Log
-from models.message import Message
-from connections.postgres import Base
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
@@ -53,11 +53,13 @@ def run_migrations_offline() -> None:
     with context.begin_transaction():
         context.run_migrations()
 
+
 def do_run_migrations(connection):
     context.configure(connection=connection, target_metadata=target_metadata)
 
     with context.begin_transaction():
         context.run_migrations()
+
 
 async def run_migrations_online() -> None:
     """Run migrations in 'online' mode.
